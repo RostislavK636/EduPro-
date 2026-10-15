@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import { spawnSync,execFileSync } from 'node:child_process';
+const output='research/results';fs.mkdirSync(output,{recursive:true});
+const run=spawnSync(process.execPath,['node_modules/vitest/vitest.mjs','run','--reporter=json',`--outputFile=${output}/technical-vitest.json`],{env:{...process.env,RESEARCH_RECORD:'1'},encoding:'utf8'});
+process.stdout.write(run.stdout||'');process.stderr.write(run.stderr||'');
+if(!fs.existsSync(`${output}/technical-vitest.json`))throw Error('Отчёт тестового запуска не создан');
+const report=JSON.parse(fs.readFileSync(`${output}/technical-vitest.json`,'utf8'));const observations=fs.existsSync(`${output}/api-observations.json`)?JSON.parse(fs.readFileSync(`${output}/api-observations.json`,'utf8')):[];
+const cases=report.testResults.flatMap(suite=>suite.assertionResults.map(a=>({id:a.title.match(/^L\d+/)?.[0]||a.fullName,source:suite.name.replaceAll('\\','/').split('/').slice(-2).join('/'),initial:suite.name.includes('learning-api')?'Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.':'Литералы и фиксированные входы, описанные в исходном тесте до реализации.',actions:a.fullName,expected:a.title,actual:observations.filter(o=>o.scenario===a.fullName).length?observations.filter(o=>o.scenario===a.fullName):{assertions:a.status,diagnostics:a.failureMessages},status:a.status,durationMs:a.duration,diagnostics:a.failureMessages})));
+const data={kind:'TECHNICAL_TESTS_NOT_PEDAGOGICAL_STUDY',generatedAt:new Date().toISOString(),node:process.version,commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),workingTreeDirty:!!execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).trim(),total:report.numTotalTests,passed:report.numPassedTests,failed:report.numFailedTests,predefinedLearningScenarios:cases.filter(c=>c.source.includes('learning-engine')||c.source.includes('learning-api')).length,cases};
+fs.writeFileSync(`${output}/technical.json`,JSON.stringify(data,null,2));
+const escape=v=>'"'+String(v??'').replaceAll('"','""')+'"';const rows=cases.map(c=>[c.id,c.initial,c.actions,c.expected,JSON.stringify(c.actual),c.status,JSON.stringify(c.diagnostics)].map(escape).join(','));fs.writeFileSync(`${output}/technical.csv`,['id,initial,actions,expected,actual,status,diagnostics',...rows].join('\r\n'));
+console.log(JSON.stringify({total:data.total,passed:data.passed,failed:data.failed,predefinedLearningScenarios:data.predefinedLearningScenarios}));process.exitCode=run.status||0;

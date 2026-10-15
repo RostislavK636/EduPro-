@@ -1,0 +1,776 @@
+[
+  {
+    "scenario": "L21 неавторизованный тренажёр закрыт",
+    "method": "GET",
+    "area": "sessions",
+    "status": 401,
+    "error": "Войдите в аккаунт."
+  },
+  {
+    "scenario": "L22 пустая аналитика не выдумывает успех",
+    "method": "GET",
+    "area": "progress",
+    "status": 200,
+    "metrics": {
+      "total": 0,
+      "correct": 0,
+      "accuracy": null,
+      "completedTrainings": 0
+    }
+  },
+  {
+    "scenario": "L23 чужая тема и неверный ответ отклоняются",
+    "method": "POST",
+    "area": "sessions",
+    "status": 400,
+    "error": "Проверьте поля запроса."
+  },
+  {
+    "scenario": "L24 создаёт диагностику без раскрытия эталона",
+    "method": "POST",
+    "area": "sessions",
+    "status": 201,
+    "count": 0,
+    "level": 1,
+    "mastery": 0.5,
+    "completed": false,
+    "questionId": "fractions-1-1"
+  },
+  {
+    "scenario": "L25 восстановление сохраняет то же задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 0,
+    "level": 1,
+    "mastery": 0.5,
+    "completed": false,
+    "questionId": "fractions-1-1"
+  },
+  {
+    "scenario": "L26 чужой пользователь не видит сессию",
+    "method": "GET",
+    "area": "sessions",
+    "status": 404,
+    "error": "Сессия не найдена."
+  },
+  {
+    "scenario": "L27 пустой и нечисловой ответ не записывается",
+    "method": "POST",
+    "area": "sessions",
+    "status": 400,
+    "error": "Проверьте поля запроса."
+  },
+  {
+    "scenario": "L27 пустой и нечисловой ответ не записывается",
+    "method": "POST",
+    "area": "sessions",
+    "status": 400,
+    "error": "Введите только число."
+  },
+  {
+    "scenario": "L28 конкурентный ответ записывается ровно один раз",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 1,
+    "level": 1,
+    "mastery": 0.6666666666666666,
+    "completed": false,
+    "questionId": "fractions-1-2",
+    "feedback": {
+      "correct": true,
+      "answer": "6"
+    }
+  },
+  {
+    "scenario": "L28 конкурентный ответ записывается ровно один раз",
+    "method": "POST",
+    "area": "sessions",
+    "status": 409,
+    "error": "Ответ уже принят. Обновите состояние."
+  },
+  {
+    "scenario": "L28 конкурентный ответ записывается ровно один раз",
+    "method": "GET",
+    "area": "progress",
+    "status": 200,
+    "metrics": {
+      "total": 1,
+      "correct": 1,
+      "accuracy": 1,
+      "completedTrainings": 0
+    }
+  },
+  {
+    "scenario": "L29 idempotent retry не добавляет попытку",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 1,
+    "level": 1,
+    "mastery": 0.6666666666666666,
+    "completed": false,
+    "questionId": "fractions-1-2"
+  },
+  {
+    "scenario": "L29 idempotent retry не добавляет попытку",
+    "method": "GET",
+    "area": "progress",
+    "status": 200,
+    "metrics": {
+      "total": 1,
+      "correct": 1,
+      "accuracy": 1,
+      "completedTrainings": 0
+    }
+  },
+  {
+    "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 1,
+    "level": 1,
+    "mastery": 0.6666666666666666,
+    "completed": false,
+    "questionId": "fractions-1-2"
+  },
+  {
+    "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 2,
+    "level": 1,
+    "mastery": 0.75,
+    "completed": false,
+    "questionId": "fractions-2-1",
+    "feedback": {
+      "correct": true,
+      "answer": "7"
+    }
+  },
+  {
+    "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 2,
+    "level": 1,
+    "mastery": 0.75,
+    "completed": false,
+    "questionId": "fractions-2-1"
+  },
+  {
+    "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 3,
+    "level": 1,
+    "mastery": 0.8333333333333334,
+    "completed": false,
+    "questionId": "fractions-2-2",
+    "feedback": {
+      "correct": true,
+      "answer": "10"
+    }
+  },
+  {
+    "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 3,
+    "level": 1,
+    "mastery": 0.8333333333333334,
+    "completed": false,
+    "questionId": "fractions-2-2"
+  },
+  {
+    "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 4,
+    "level": 1,
+    "mastery": 0.875,
+    "completed": false,
+    "questionId": "fractions-3-1",
+    "feedback": {
+      "correct": true,
+      "answer": "20"
+    }
+  },
+  {
+    "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 4,
+    "level": 1,
+    "mastery": 0.875,
+    "completed": false,
+    "questionId": "fractions-3-1"
+  },
+  {
+    "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 5,
+    "level": 3,
+    "mastery": 0.9090909090909091,
+    "completed": false,
+    "questionId": "fractions-3-2",
+    "feedback": {
+      "correct": true,
+      "answer": "90"
+    }
+  },
+  {
+    "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 5,
+    "level": 3,
+    "mastery": 0.9090909090909091,
+    "completed": false,
+    "questionId": "fractions-3-2"
+  },
+  {
+    "scenario": "L31 преподавателю запрещена аналитика постороннего ученика",
+    "method": "GET",
+    "area": "analytics",
+    "status": 403,
+    "error": "Ученик не относится к вашим классам."
+  },
+  {
+    "scenario": "L32 ученик не создаёт вопросы",
+    "method": "POST",
+    "area": "tasks",
+    "status": 403,
+    "error": "Доступно преподавателю."
+  },
+  {
+    "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+    "method": "POST",
+    "area": "tasks",
+    "status": 201,
+    "taskStatus": "draft"
+  },
+  {
+    "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+    "method": "PATCH",
+    "area": "tasks",
+    "status": 409,
+    "error": "Сначала отправьте задание на проверку."
+  },
+  {
+    "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+    "method": "PATCH",
+    "area": "tasks",
+    "status": 200,
+    "taskStatus": "pending"
+  },
+  {
+    "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+    "method": "PATCH",
+    "area": "tasks",
+    "status": 403,
+    "error": "Доступно преподавателю."
+  },
+  {
+    "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+    "method": "PATCH",
+    "area": "tasks",
+    "status": 200,
+    "taskStatus": "approved"
+  },
+  {
+    "scenario": "L34 недоступность Live не ломает автономную сессию",
+    "method": "POST",
+    "area": "assist",
+    "status": 503,
+    "error": "AI_MODE=live требует AI_API_KEY."
+  },
+  {
+    "scenario": "L34 недоступность Live не ломает автономную сессию",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 5,
+    "level": 3,
+    "mastery": 0.9090909090909091,
+    "completed": false,
+    "questionId": "fractions-3-2"
+  },
+  {
+    "scenario": "L35 неверный структурированный ответ AI не сохраняет черновик",
+    "method": "POST",
+    "area": "tasks",
+    "status": 502,
+    "error": "AI вернул некорректное задание после двух попыток. Ничего не опубликовано."
+  },
+  {
+    "scenario": "L36 новая тема не наследует уровень старой диагностики",
+    "method": "POST",
+    "area": "sessions",
+    "status": 201,
+    "count": 0,
+    "level": 1,
+    "mastery": 0.5,
+    "completed": false,
+    "questionId": "binary-1-1"
+  },
+  {
+    "scenario": "L37 демо-попытки не попадают в обычную аналитику",
+    "method": "POST",
+    "area": "sessions",
+    "status": 201,
+    "count": 0,
+    "level": 1,
+    "mastery": 0.5,
+    "completed": false,
+    "questionId": "binary-1-1"
+  },
+  {
+    "scenario": "L37 демо-попытки не попадают в обычную аналитику",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 1,
+    "level": 1,
+    "mastery": 0.6666666666666666,
+    "completed": false,
+    "questionId": "binary-1-2",
+    "feedback": {
+      "correct": true,
+      "answer": "3"
+    }
+  },
+  {
+    "scenario": "L37 демо-попытки не попадают в обычную аналитику",
+    "method": "GET",
+    "area": "progress",
+    "status": 200,
+    "metrics": {
+      "total": 5,
+      "correct": 5,
+      "accuracy": 1,
+      "completedTrainings": 0
+    }
+  },
+  {
+    "scenario": "L37 демо-попытки не попадают в обычную аналитику",
+    "method": "GET",
+    "area": "progress",
+    "status": 200,
+    "metrics": {
+      "total": 1,
+      "correct": 1,
+      "accuracy": 1,
+      "completedTrainings": 0
+    }
+  },
+  {
+    "scenario": "L38 преподаватель видит реальные5/5 только зачисленного ученика",
+    "method": "GET",
+    "area": "analytics",
+    "status": 200,
+    "metrics": {
+      "total": 5,
+      "correct": 5,
+      "accuracy": 1,
+      "completedTrainings": 0
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 5,
+    "level": 3,
+    "mastery": 0.9090909090909091,
+    "completed": false,
+    "questionId": "fractions-3-2"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 6,
+    "level": 3,
+    "mastery": 0.9285714285714286,
+    "completed": false,
+    "questionId": "fractions-3-3",
+    "feedback": {
+      "correct": true,
+      "answer": "180"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 6,
+    "level": 3,
+    "mastery": 0.9285714285714286,
+    "completed": false,
+    "questionId": "fractions-3-3"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 7,
+    "level": 3,
+    "mastery": 0.9411764705882353,
+    "completed": false,
+    "questionId": "fractions-3-4",
+    "feedback": {
+      "correct": true,
+      "answer": "270"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 7,
+    "level": 3,
+    "mastery": 0.9411764705882353,
+    "completed": false,
+    "questionId": "fractions-3-4"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 8,
+    "level": 3,
+    "mastery": 0.95,
+    "completed": false,
+    "questionId": "fractions-3-5",
+    "feedback": {
+      "correct": true,
+      "answer": "360"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 8,
+    "level": 3,
+    "mastery": 0.95,
+    "completed": false,
+    "questionId": "fractions-3-5"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 9,
+    "level": 3,
+    "mastery": 0.9565217391304348,
+    "completed": false,
+    "questionId": "fractions-3-6",
+    "feedback": {
+      "correct": true,
+      "answer": "450"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 9,
+    "level": 3,
+    "mastery": 0.9565217391304348,
+    "completed": false,
+    "questionId": "fractions-3-6"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 10,
+    "level": 3,
+    "mastery": 0.9615384615384616,
+    "completed": false,
+    "questionId": "fractions-3-1",
+    "feedback": {
+      "correct": true,
+      "answer": "540"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 10,
+    "level": 3,
+    "mastery": 0.9615384615384616,
+    "completed": false,
+    "questionId": "fractions-3-1"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 11,
+    "level": 3,
+    "mastery": 0.9636363636363636,
+    "completed": false,
+    "questionId": "fractions-3-2",
+    "feedback": {
+      "correct": true,
+      "answer": "90"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 11,
+    "level": 3,
+    "mastery": 0.9636363636363636,
+    "completed": false,
+    "questionId": "fractions-3-2"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 12,
+    "level": 3,
+    "mastery": 0.9655172413793104,
+    "completed": false,
+    "questionId": "fractions-3-3",
+    "feedback": {
+      "correct": true,
+      "answer": "180"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 12,
+    "level": 3,
+    "mastery": 0.9655172413793104,
+    "completed": false,
+    "questionId": "fractions-3-3"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 13,
+    "level": 3,
+    "mastery": 0.9672131147540983,
+    "completed": false,
+    "questionId": "fractions-3-4",
+    "feedback": {
+      "correct": true,
+      "answer": "270"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 13,
+    "level": 3,
+    "mastery": 0.9672131147540983,
+    "completed": false,
+    "questionId": "fractions-3-4"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 14,
+    "level": 3,
+    "mastery": 0.96875,
+    "completed": false,
+    "questionId": "fractions-3-5",
+    "feedback": {
+      "correct": true,
+      "answer": "360"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 14,
+    "level": 3,
+    "mastery": 0.96875,
+    "completed": false,
+    "questionId": "fractions-3-5"
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 15,
+    "level": 3,
+    "mastery": 0.9701492537313433,
+    "completed": true,
+    "feedback": {
+      "correct": true,
+      "answer": "450"
+    }
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 15,
+    "level": 3,
+    "mastery": 0.9701492537313433,
+    "completed": true
+  },
+  {
+    "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+    "method": "GET",
+    "area": "progress",
+    "status": 200,
+    "metrics": {
+      "total": 15,
+      "correct": 15,
+      "accuracy": 1,
+      "completedTrainings": 1
+    }
+  },
+  {
+    "scenario": "L40 повторный вход сохраняет15 попыток и старый cookie закрывается",
+    "method": "GET",
+    "area": "sessions",
+    "status": 401,
+    "error": "Войдите в аккаунт."
+  },
+  {
+    "scenario": "L40 повторный вход сохраняет15 попыток и старый cookie закрывается",
+    "method": "GET",
+    "area": "sessions",
+    "status": 200,
+    "count": 15,
+    "level": 3,
+    "mastery": 0.9701492537313433,
+    "completed": true
+  },
+  {
+    "scenario": "L41 сломанный envelope AI возвращает502, не ошибку пользовательских полей",
+    "method": "POST",
+    "area": "assist",
+    "status": 502,
+    "error": "Провайдер вернул некорректный ответ. Повторите запрос."
+  },
+  {
+    "scenario": "L42 объяснение темы не отправляет модели эталон и профиль пользователя",
+    "method": "POST",
+    "area": "sessions",
+    "status": 201,
+    "count": 0,
+    "level": 1,
+    "mastery": 0.5,
+    "completed": false,
+    "questionId": "binary-1-1"
+  },
+  {
+    "scenario": "L42 объяснение темы не отправляет модели эталон и профиль пользователя",
+    "method": "POST",
+    "area": "assist",
+    "status": 200
+  },
+  {
+    "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+    "method": "POST",
+    "area": "sessions",
+    "status": 201,
+    "count": 0,
+    "level": 1,
+    "mastery": 0.5,
+    "completed": false,
+    "questionId": "equations-1-1"
+  },
+  {
+    "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+    "method": "POST",
+    "area": "sessions",
+    "status": 201,
+    "count": 0,
+    "level": 1,
+    "mastery": 0.5,
+    "completed": false,
+    "questionId": "equations-1-1"
+  },
+  {
+    "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 1,
+    "level": 1,
+    "mastery": 0.7142857142857143,
+    "completed": false,
+    "questionId": "equations-1-2",
+    "feedback": {
+      "correct": true,
+      "answer": "3"
+    }
+  },
+  {
+    "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+    "method": "POST",
+    "area": "sessions",
+    "status": 200,
+    "count": 1,
+    "level": 1,
+    "mastery": 0.7142857142857143,
+    "completed": false,
+    "questionId": "equations-1-2",
+    "feedback": {
+      "correct": true,
+      "answer": "3"
+    }
+  },
+  {
+    "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+    "method": "GET",
+    "area": "progress",
+    "status": 200,
+    "metrics": {
+      "total": 17,
+      "correct": 17,
+      "accuracy": 1,
+      "completedTrainings": 1
+    }
+  }
+]

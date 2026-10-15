@@ -1,0 +1,1 @@
+case_id,model,model_version,prompt_version,reviewer_pseudonym,subject_correctness_0_2,age_fit_0_2,explanation_0_2,evidence_0_2,safety_0_2,json_valid,latency_ms,blocking_issue,notes

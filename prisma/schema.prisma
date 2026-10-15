@@ -1,0 +1,243 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "client"
+}
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+model User {
+  id String @id @default(cuid())
+  firstName String
+  lastName String
+  email String @unique
+  passwordHash String
+  role String @default("teacher")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  settings UserSettings?
+  sessions Session[]
+  chats Chat[]
+  materials Material[]
+  attachments FileAttachment[]
+  classes SchoolClass[]
+  enrollments Enrollment[]
+  submissions Submission[]
+  attempts QuizAttempt[]
+  quizSessions QuizSession[]
+  trainings TrainingSession[]
+  learningTasks LearningTask[]
+}
+model UserSettings {
+  userId String @id
+  theme String @default("dark")
+  preferredSubject String @default("Математика")
+  preferredGrade Int @default(7)
+  preferences Json @default("{}")
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+}
+model Session {
+  id String @id
+  userId String
+  expiresAt DateTime
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  @@index([userId])
+}
+model RateLimit {
+  key String @id
+  count Int @default(0)
+  expiresAt DateTime
+}
+model Chat {
+  id String @id @default(cuid())
+  userId String
+  title String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  messages Message[]
+  @@index([userId,updatedAt])
+}
+model Message {
+  id String @id @default(cuid())
+  chatId String
+  role String
+  content String
+  demo Boolean @default(false)
+  createdAt DateTime @default(now())
+  chat Chat @relation(fields:[chatId],references:[id],onDelete:Cascade)
+  @@index([chatId,createdAt])
+}
+model Material {
+  id String @id @default(cuid())
+  userId String
+  title String
+  type String
+  subject String
+  grade Int
+  status String @default("draft")
+  version Int @default(1)
+  contentJson Json
+  metadataJson Json @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  attachments FileAttachment[]
+  assignments Assignment[]
+  attempts QuizAttempt[]
+  quizSessions QuizSession[]
+  @@index([userId,type,updatedAt])
+}
+model FileAttachment {
+  id String @id @default(cuid())
+  ownerId String
+  materialId String?
+  storageKey String @unique
+  originalName String
+  mimeType String
+  size Int
+  createdAt DateTime @default(now())
+  owner User @relation(fields:[ownerId],references:[id],onDelete:Cascade)
+  material Material? @relation(fields:[materialId],references:[id],onDelete:SetNull)
+  @@index([ownerId])
+}
+model SchoolClass {
+  id String @id @default(cuid())
+  teacherId String
+  name String
+  subject String
+  createdAt DateTime @default(now())
+  teacher User @relation(fields:[teacherId],references:[id],onDelete:Cascade)
+  enrollments Enrollment[]
+  assignments Assignment[]
+  invites ClassInvite[]
+  @@index([teacherId])
+}
+model ClassInvite {
+  id String @id
+  classId String
+  remaining Int @default(1)
+  expiresAt DateTime
+  class SchoolClass @relation(fields:[classId],references:[id],onDelete:Cascade)
+}
+model Enrollment {
+  id String @id @default(cuid())
+  classId String
+  studentId String
+  joinedAt DateTime @default(now())
+  class SchoolClass @relation(fields:[classId],references:[id],onDelete:Cascade)
+  student User @relation(fields:[studentId],references:[id],onDelete:Cascade)
+  @@unique([classId,studentId])
+  @@index([studentId])
+}
+model Assignment {
+  id String @id @default(cuid())
+  classId String
+  materialId String
+  title String
+  dueDate DateTime?
+  class SchoolClass @relation(fields:[classId],references:[id],onDelete:Cascade)
+  material Material @relation(fields:[materialId],references:[id],onDelete:Restrict)
+  submissions Submission[]
+  @@index([classId])
+}
+model Submission {
+  id String @id @default(cuid())
+  assignmentId String
+  studentId String
+  contentJson Json
+  submittedAt DateTime @default(now())
+  assignment Assignment @relation(fields:[assignmentId],references:[id],onDelete:Cascade)
+  student User @relation(fields:[studentId],references:[id],onDelete:Cascade)
+  grade Grade?
+  @@unique([assignmentId,studentId])
+}
+model Grade {
+  id String @id @default(cuid())
+  submissionId String @unique
+  score Float
+  maxScore Float
+  teacherComment String
+  approvedAt DateTime
+  submission Submission @relation(fields:[submissionId],references:[id],onDelete:Cascade)
+}
+model QuizAttempt {
+  id String @id @default(cuid())
+  userId String
+  materialId String
+  score Float
+  answersJson Json
+  createdAt DateTime @default(now())
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  material Material @relation(fields:[materialId],references:[id],onDelete:Cascade)
+  @@index([userId,createdAt])
+}
+model QuizSession {
+  id String @id
+  userId String
+  materialId String
+  expiresAt DateTime
+  usedAt DateTime?
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  material Material @relation(fields:[materialId],references:[id],onDelete:Cascade)
+  @@index([userId,materialId])
+}
+
+model TrainingSession {
+  id String @id @default(cuid())
+  userId String
+  topic String
+  mode String
+  grade Int
+  configJson Json
+  algorithmVersion String
+  dataKind String @default("user")
+  createdAt DateTime @default(now())
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  turns TrainingTurn[]
+  @@index([userId,topic,createdAt])
+}
+model TrainingTurn {
+  id String @id @default(cuid())
+  sessionId String
+  sequence Int
+  questionId String
+  snapshotJson Json
+  selectionReason String
+  issuedAt DateTime @default(now())
+  session TrainingSession @relation(fields:[sessionId],references:[id],onDelete:Cascade)
+  attempt TrainingAttempt?
+  @@unique([sessionId,sequence])
+}
+model TrainingAttempt {
+  id String @id @default(cuid())
+  turnId String @unique
+  requestId String
+  answer String
+  correct Boolean
+  durationMs Int
+  levelBefore Int
+  levelAfter Int
+  observedMasteryBefore Float @map("masteryBefore")
+  observedMasteryAfter Float @map("masteryAfter")
+  reason String
+  observationJson Json @map("evidenceJson")
+  errorTagsJson Json
+  createdAt DateTime @default(now())
+  turn TrainingTurn @relation(fields:[turnId],references:[id],onDelete:Cascade)
+}
+model LearningTask {
+  id String @id @default(cuid())
+  ownerId String
+  classId String?
+  questionJson Json
+  status String @default("draft")
+  origin String
+  model String?
+  version Int @default(1)
+  reviewedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  owner User @relation(fields:[ownerId],references:[id],onDelete:Cascade)
+  @@index([ownerId,status])
+}

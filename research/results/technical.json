@@ -1,0 +1,1931 @@
+{
+  "kind": "TECHNICAL_TESTS_NOT_PEDAGOGICAL_STUDY",
+  "generatedAt": "2026-10-15T15:36:31.282Z",
+  "node": "v20.20.1",
+  "commit": "2c19f2a75dc45f9ed0f2f9efb0d704b7fc1de103",
+  "workingTreeDirty": true,
+  "total": 85,
+  "passed": 85,
+  "failed": 0,
+  "predefinedLearningScenarios": 44,
+  "cases": [
+    {
+      "id": "L21",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L21 неавторизованный тренажёр закрыт",
+      "expected": "L21 неавторизованный тренажёр закрыт",
+      "actual": [
+        {
+          "scenario": "L21 неавторизованный тренажёр закрыт",
+          "method": "GET",
+          "area": "sessions",
+          "status": 401,
+          "error": "Войдите в аккаунт."
+        }
+      ],
+      "status": "passed",
+      "durationMs": 4.003200000000106,
+      "diagnostics": []
+    },
+    {
+      "id": "L22",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L22 пустая аналитика не выдумывает успех",
+      "expected": "L22 пустая аналитика не выдумывает успех",
+      "actual": [
+        {
+          "scenario": "L22 пустая аналитика не выдумывает успех",
+          "method": "GET",
+          "area": "progress",
+          "status": 200,
+          "metrics": {
+            "total": 0,
+            "correct": 0,
+            "accuracy": null,
+            "completedTrainings": 0
+          }
+        }
+      ],
+      "status": "passed",
+      "durationMs": 19.956700000000183,
+      "diagnostics": []
+    },
+    {
+      "id": "L23",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L23 чужая тема и неверный ответ отклоняются",
+      "expected": "L23 чужая тема и неверный ответ отклоняются",
+      "actual": [
+        {
+          "scenario": "L23 чужая тема и неверный ответ отклоняются",
+          "method": "POST",
+          "area": "sessions",
+          "status": 400,
+          "error": "Проверьте поля запроса."
+        }
+      ],
+      "status": "passed",
+      "durationMs": 9.97649999999976,
+      "diagnostics": []
+    },
+    {
+      "id": "L24",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L24 создаёт диагностику без раскрытия эталона",
+      "expected": "L24 создаёт диагностику без раскрытия эталона",
+      "actual": [
+        {
+          "scenario": "L24 создаёт диагностику без раскрытия эталона",
+          "method": "POST",
+          "area": "sessions",
+          "status": 201,
+          "count": 0,
+          "level": 1,
+          "mastery": 0.5,
+          "completed": false,
+          "questionId": "fractions-1-1"
+        }
+      ],
+      "status": "passed",
+      "durationMs": 42.38999999999987,
+      "diagnostics": []
+    },
+    {
+      "id": "L25",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L25 восстановление сохраняет то же задание",
+      "expected": "L25 восстановление сохраняет то же задание",
+      "actual": [
+        {
+          "scenario": "L25 восстановление сохраняет то же задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 0,
+          "level": 1,
+          "mastery": 0.5,
+          "completed": false,
+          "questionId": "fractions-1-1"
+        }
+      ],
+      "status": "passed",
+      "durationMs": 12.285299999999552,
+      "diagnostics": []
+    },
+    {
+      "id": "L26",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L26 чужой пользователь не видит сессию",
+      "expected": "L26 чужой пользователь не видит сессию",
+      "actual": [
+        {
+          "scenario": "L26 чужой пользователь не видит сессию",
+          "method": "GET",
+          "area": "sessions",
+          "status": 404,
+          "error": "Сессия не найдена."
+        }
+      ],
+      "status": "passed",
+      "durationMs": 11.6591999999996,
+      "diagnostics": []
+    },
+    {
+      "id": "L27",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L27 пустой и нечисловой ответ не записывается",
+      "expected": "L27 пустой и нечисловой ответ не записывается",
+      "actual": [
+        {
+          "scenario": "L27 пустой и нечисловой ответ не записывается",
+          "method": "POST",
+          "area": "sessions",
+          "status": 400,
+          "error": "Проверьте поля запроса."
+        },
+        {
+          "scenario": "L27 пустой и нечисловой ответ не записывается",
+          "method": "POST",
+          "area": "sessions",
+          "status": 400,
+          "error": "Введите только число."
+        }
+      ],
+      "status": "passed",
+      "durationMs": 22.676899999999932,
+      "diagnostics": []
+    },
+    {
+      "id": "L28",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L28 конкурентный ответ записывается ровно один раз",
+      "expected": "L28 конкурентный ответ записывается ровно один раз",
+      "actual": [
+        {
+          "scenario": "L28 конкурентный ответ записывается ровно один раз",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 1,
+          "level": 1,
+          "mastery": 0.6666666666666666,
+          "completed": false,
+          "questionId": "fractions-1-2",
+          "feedback": {
+            "correct": true,
+            "answer": "6"
+          }
+        },
+        {
+          "scenario": "L28 конкурентный ответ записывается ровно один раз",
+          "method": "POST",
+          "area": "sessions",
+          "status": 409,
+          "error": "Ответ уже принят. Обновите состояние."
+        },
+        {
+          "scenario": "L28 конкурентный ответ записывается ровно один раз",
+          "method": "GET",
+          "area": "progress",
+          "status": 200,
+          "metrics": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1,
+            "completedTrainings": 0
+          }
+        }
+      ],
+      "status": "passed",
+      "durationMs": 54.01669999999967,
+      "diagnostics": []
+    },
+    {
+      "id": "L29",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L29 idempotent retry не добавляет попытку",
+      "expected": "L29 idempotent retry не добавляет попытку",
+      "actual": [
+        {
+          "scenario": "L29 idempotent retry не добавляет попытку",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 1,
+          "level": 1,
+          "mastery": 0.6666666666666666,
+          "completed": false,
+          "questionId": "fractions-1-2"
+        },
+        {
+          "scenario": "L29 idempotent retry не добавляет попытку",
+          "method": "GET",
+          "area": "progress",
+          "status": 200,
+          "metrics": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1,
+            "completedTrainings": 0
+          }
+        }
+      ],
+      "status": "passed",
+      "durationMs": 23.366700000000037,
+      "diagnostics": []
+    },
+    {
+      "id": "L30",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+      "expected": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+      "actual": [
+        {
+          "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 1,
+          "level": 1,
+          "mastery": 0.6666666666666666,
+          "completed": false,
+          "questionId": "fractions-1-2"
+        },
+        {
+          "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 2,
+          "level": 1,
+          "mastery": 0.75,
+          "completed": false,
+          "questionId": "fractions-2-1",
+          "feedback": {
+            "correct": true,
+            "answer": "7"
+          }
+        },
+        {
+          "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 2,
+          "level": 1,
+          "mastery": 0.75,
+          "completed": false,
+          "questionId": "fractions-2-1"
+        },
+        {
+          "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 3,
+          "level": 1,
+          "mastery": 0.8333333333333334,
+          "completed": false,
+          "questionId": "fractions-2-2",
+          "feedback": {
+            "correct": true,
+            "answer": "10"
+          }
+        },
+        {
+          "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 3,
+          "level": 1,
+          "mastery": 0.8333333333333334,
+          "completed": false,
+          "questionId": "fractions-2-2"
+        },
+        {
+          "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 4,
+          "level": 1,
+          "mastery": 0.875,
+          "completed": false,
+          "questionId": "fractions-3-1",
+          "feedback": {
+            "correct": true,
+            "answer": "20"
+          }
+        },
+        {
+          "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 4,
+          "level": 1,
+          "mastery": 0.875,
+          "completed": false,
+          "questionId": "fractions-3-1"
+        },
+        {
+          "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 5,
+          "level": 3,
+          "mastery": 0.9090909090909091,
+          "completed": false,
+          "questionId": "fractions-3-2",
+          "feedback": {
+            "correct": true,
+            "answer": "90"
+          }
+        },
+        {
+          "scenario": "L30 диагностика из пяти правильных даёт3 и сохраняет объяснение",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 5,
+          "level": 3,
+          "mastery": 0.9090909090909091,
+          "completed": false,
+          "questionId": "fractions-3-2"
+        }
+      ],
+      "status": "passed",
+      "durationMs": 168.81500000000005,
+      "diagnostics": []
+    },
+    {
+      "id": "L31",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L31 преподавателю запрещена аналитика постороннего ученика",
+      "expected": "L31 преподавателю запрещена аналитика постороннего ученика",
+      "actual": [
+        {
+          "scenario": "L31 преподавателю запрещена аналитика постороннего ученика",
+          "method": "GET",
+          "area": "analytics",
+          "status": 403,
+          "error": "Ученик не относится к вашим классам."
+        }
+      ],
+      "status": "passed",
+      "durationMs": 10.63229999999976,
+      "diagnostics": []
+    },
+    {
+      "id": "L32",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L32 ученик не создаёт вопросы",
+      "expected": "L32 ученик не создаёт вопросы",
+      "actual": [
+        {
+          "scenario": "L32 ученик не создаёт вопросы",
+          "method": "POST",
+          "area": "tasks",
+          "status": 403,
+          "error": "Доступно преподавателю."
+        }
+      ],
+      "status": "passed",
+      "durationMs": 9.4391999999998,
+      "diagnostics": []
+    },
+    {
+      "id": "L33",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+      "expected": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+      "actual": [
+        {
+          "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+          "method": "POST",
+          "area": "tasks",
+          "status": 201,
+          "taskStatus": "draft"
+        },
+        {
+          "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+          "method": "PATCH",
+          "area": "tasks",
+          "status": 409,
+          "error": "Сначала отправьте задание на проверку."
+        },
+        {
+          "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+          "method": "PATCH",
+          "area": "tasks",
+          "status": 200,
+          "taskStatus": "pending"
+        },
+        {
+          "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+          "method": "PATCH",
+          "area": "tasks",
+          "status": 403,
+          "error": "Доступно преподавателю."
+        },
+        {
+          "scenario": "L33 демо AI-задание проходит только draft→pending→approved учителем",
+          "method": "PATCH",
+          "area": "tasks",
+          "status": 200,
+          "taskStatus": "approved"
+        }
+      ],
+      "status": "passed",
+      "durationMs": 67.7873999999997,
+      "diagnostics": []
+    },
+    {
+      "id": "L34",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L34 недоступность Live не ломает автономную сессию",
+      "expected": "L34 недоступность Live не ломает автономную сессию",
+      "actual": [
+        {
+          "scenario": "L34 недоступность Live не ломает автономную сессию",
+          "method": "POST",
+          "area": "assist",
+          "status": 503,
+          "error": "AI_MODE=live требует AI_API_KEY."
+        },
+        {
+          "scenario": "L34 недоступность Live не ломает автономную сессию",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 5,
+          "level": 3,
+          "mastery": 0.9090909090909091,
+          "completed": false,
+          "questionId": "fractions-3-2"
+        }
+      ],
+      "status": "passed",
+      "durationMs": 26.540500000000065,
+      "diagnostics": []
+    },
+    {
+      "id": "L35",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L35 неверный структурированный ответ AI не сохраняет черновик",
+      "expected": "L35 неверный структурированный ответ AI не сохраняет черновик",
+      "actual": [
+        {
+          "scenario": "L35 неверный структурированный ответ AI не сохраняет черновик",
+          "method": "POST",
+          "area": "tasks",
+          "status": 502,
+          "error": "AI вернул некорректное задание после двух попыток. Ничего не опубликовано."
+        }
+      ],
+      "status": "passed",
+      "durationMs": 17.955000000000382,
+      "diagnostics": []
+    },
+    {
+      "id": "L36",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L36 новая тема не наследует уровень старой диагностики",
+      "expected": "L36 новая тема не наследует уровень старой диагностики",
+      "actual": [
+        {
+          "scenario": "L36 новая тема не наследует уровень старой диагностики",
+          "method": "POST",
+          "area": "sessions",
+          "status": 201,
+          "count": 0,
+          "level": 1,
+          "mastery": 0.5,
+          "completed": false,
+          "questionId": "binary-1-1"
+        }
+      ],
+      "status": "passed",
+      "durationMs": 27.08699999999999,
+      "diagnostics": []
+    },
+    {
+      "id": "L37",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L37 демо-попытки не попадают в обычную аналитику",
+      "expected": "L37 демо-попытки не попадают в обычную аналитику",
+      "actual": [
+        {
+          "scenario": "L37 демо-попытки не попадают в обычную аналитику",
+          "method": "POST",
+          "area": "sessions",
+          "status": 201,
+          "count": 0,
+          "level": 1,
+          "mastery": 0.5,
+          "completed": false,
+          "questionId": "binary-1-1"
+        },
+        {
+          "scenario": "L37 демо-попытки не попадают в обычную аналитику",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 1,
+          "level": 1,
+          "mastery": 0.6666666666666666,
+          "completed": false,
+          "questionId": "binary-1-2",
+          "feedback": {
+            "correct": true,
+            "answer": "3"
+          }
+        },
+        {
+          "scenario": "L37 демо-попытки не попадают в обычную аналитику",
+          "method": "GET",
+          "area": "progress",
+          "status": 200,
+          "metrics": {
+            "total": 5,
+            "correct": 5,
+            "accuracy": 1,
+            "completedTrainings": 0
+          }
+        },
+        {
+          "scenario": "L37 демо-попытки не попадают в обычную аналитику",
+          "method": "GET",
+          "area": "progress",
+          "status": 200,
+          "metrics": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1,
+            "completedTrainings": 0
+          }
+        }
+      ],
+      "status": "passed",
+      "durationMs": 74.62829999999985,
+      "diagnostics": []
+    },
+    {
+      "id": "L38",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L38 преподаватель видит реальные5/5 только зачисленного ученика",
+      "expected": "L38 преподаватель видит реальные5/5 только зачисленного ученика",
+      "actual": [
+        {
+          "scenario": "L38 преподаватель видит реальные5/5 только зачисленного ученика",
+          "method": "GET",
+          "area": "analytics",
+          "status": 200,
+          "metrics": {
+            "total": 5,
+            "correct": 5,
+            "accuracy": 1,
+            "completedTrainings": 0
+          }
+        }
+      ],
+      "status": "passed",
+      "durationMs": 25.062000000000353,
+      "diagnostics": []
+    },
+    {
+      "id": "L39",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L39 практика завершается без AI и не выдаёт16-е задание",
+      "expected": "L39 практика завершается без AI и не выдаёт16-е задание",
+      "actual": [
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 5,
+          "level": 3,
+          "mastery": 0.9090909090909091,
+          "completed": false,
+          "questionId": "fractions-3-2"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 6,
+          "level": 3,
+          "mastery": 0.9285714285714286,
+          "completed": false,
+          "questionId": "fractions-3-3",
+          "feedback": {
+            "correct": true,
+            "answer": "180"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 6,
+          "level": 3,
+          "mastery": 0.9285714285714286,
+          "completed": false,
+          "questionId": "fractions-3-3"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 7,
+          "level": 3,
+          "mastery": 0.9411764705882353,
+          "completed": false,
+          "questionId": "fractions-3-4",
+          "feedback": {
+            "correct": true,
+            "answer": "270"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 7,
+          "level": 3,
+          "mastery": 0.9411764705882353,
+          "completed": false,
+          "questionId": "fractions-3-4"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 8,
+          "level": 3,
+          "mastery": 0.95,
+          "completed": false,
+          "questionId": "fractions-3-5",
+          "feedback": {
+            "correct": true,
+            "answer": "360"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 8,
+          "level": 3,
+          "mastery": 0.95,
+          "completed": false,
+          "questionId": "fractions-3-5"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 9,
+          "level": 3,
+          "mastery": 0.9565217391304348,
+          "completed": false,
+          "questionId": "fractions-3-6",
+          "feedback": {
+            "correct": true,
+            "answer": "450"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 9,
+          "level": 3,
+          "mastery": 0.9565217391304348,
+          "completed": false,
+          "questionId": "fractions-3-6"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 10,
+          "level": 3,
+          "mastery": 0.9615384615384616,
+          "completed": false,
+          "questionId": "fractions-3-1",
+          "feedback": {
+            "correct": true,
+            "answer": "540"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 10,
+          "level": 3,
+          "mastery": 0.9615384615384616,
+          "completed": false,
+          "questionId": "fractions-3-1"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 11,
+          "level": 3,
+          "mastery": 0.9636363636363636,
+          "completed": false,
+          "questionId": "fractions-3-2",
+          "feedback": {
+            "correct": true,
+            "answer": "90"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 11,
+          "level": 3,
+          "mastery": 0.9636363636363636,
+          "completed": false,
+          "questionId": "fractions-3-2"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 12,
+          "level": 3,
+          "mastery": 0.9655172413793104,
+          "completed": false,
+          "questionId": "fractions-3-3",
+          "feedback": {
+            "correct": true,
+            "answer": "180"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 12,
+          "level": 3,
+          "mastery": 0.9655172413793104,
+          "completed": false,
+          "questionId": "fractions-3-3"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 13,
+          "level": 3,
+          "mastery": 0.9672131147540983,
+          "completed": false,
+          "questionId": "fractions-3-4",
+          "feedback": {
+            "correct": true,
+            "answer": "270"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 13,
+          "level": 3,
+          "mastery": 0.9672131147540983,
+          "completed": false,
+          "questionId": "fractions-3-4"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 14,
+          "level": 3,
+          "mastery": 0.96875,
+          "completed": false,
+          "questionId": "fractions-3-5",
+          "feedback": {
+            "correct": true,
+            "answer": "360"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 14,
+          "level": 3,
+          "mastery": 0.96875,
+          "completed": false,
+          "questionId": "fractions-3-5"
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 15,
+          "level": 3,
+          "mastery": 0.9701492537313433,
+          "completed": true,
+          "feedback": {
+            "correct": true,
+            "answer": "450"
+          }
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 15,
+          "level": 3,
+          "mastery": 0.9701492537313433,
+          "completed": true
+        },
+        {
+          "scenario": "L39 практика завершается без AI и не выдаёт16-е задание",
+          "method": "GET",
+          "area": "progress",
+          "status": 200,
+          "metrics": {
+            "total": 15,
+            "correct": 15,
+            "accuracy": 1,
+            "completedTrainings": 1
+          }
+        }
+      ],
+      "status": "passed",
+      "durationMs": 418.43319999999994,
+      "diagnostics": []
+    },
+    {
+      "id": "L40",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L40 повторный вход сохраняет15 попыток и старый cookie закрывается",
+      "expected": "L40 повторный вход сохраняет15 попыток и старый cookie закрывается",
+      "actual": [
+        {
+          "scenario": "L40 повторный вход сохраняет15 попыток и старый cookie закрывается",
+          "method": "GET",
+          "area": "sessions",
+          "status": 401,
+          "error": "Войдите в аккаунт."
+        },
+        {
+          "scenario": "L40 повторный вход сохраняет15 попыток и старый cookie закрывается",
+          "method": "GET",
+          "area": "sessions",
+          "status": 200,
+          "count": 15,
+          "level": 3,
+          "mastery": 0.9701492537313433,
+          "completed": true
+        }
+      ],
+      "status": "passed",
+      "durationMs": 581.1109999999999,
+      "diagnostics": []
+    },
+    {
+      "id": "L41",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L41 сломанный envelope AI возвращает502, не ошибку пользовательских полей",
+      "expected": "L41 сломанный envelope AI возвращает502, не ошибку пользовательских полей",
+      "actual": [
+        {
+          "scenario": "L41 сломанный envelope AI возвращает502, не ошибку пользовательских полей",
+          "method": "POST",
+          "area": "assist",
+          "status": 502,
+          "error": "Провайдер вернул некорректный ответ. Повторите запрос."
+        }
+      ],
+      "status": "passed",
+      "durationMs": 15.900099999999838,
+      "diagnostics": []
+    },
+    {
+      "id": "L42",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L42 объяснение темы не отправляет модели эталон и профиль пользователя",
+      "expected": "L42 объяснение темы не отправляет модели эталон и профиль пользователя",
+      "actual": [
+        {
+          "scenario": "L42 объяснение темы не отправляет модели эталон и профиль пользователя",
+          "method": "POST",
+          "area": "sessions",
+          "status": 201,
+          "count": 0,
+          "level": 1,
+          "mastery": 0.5,
+          "completed": false,
+          "questionId": "binary-1-1"
+        },
+        {
+          "scenario": "L42 объяснение темы не отправляет модели эталон и профиль пользователя",
+          "method": "POST",
+          "area": "assist",
+          "status": 200
+        }
+      ],
+      "status": "passed",
+      "durationMs": 38.26270000000022,
+      "diagnostics": []
+    },
+    {
+      "id": "L43",
+      "source": "tests/learning-api.test.ts",
+      "initial": "Изолированная SQLite, все миграции, три тестовые учётные записи; сценарии выполняются в объявленном порядке.",
+      "actions": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+      "expected": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+      "actual": [
+        {
+          "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+          "method": "POST",
+          "area": "sessions",
+          "status": 201,
+          "count": 0,
+          "level": 1,
+          "mastery": 0.5,
+          "completed": false,
+          "questionId": "equations-1-1"
+        },
+        {
+          "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+          "method": "POST",
+          "area": "sessions",
+          "status": 201,
+          "count": 0,
+          "level": 1,
+          "mastery": 0.5,
+          "completed": false,
+          "questionId": "equations-1-1"
+        },
+        {
+          "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 1,
+          "level": 1,
+          "mastery": 0.7142857142857143,
+          "completed": false,
+          "questionId": "equations-1-2",
+          "feedback": {
+            "correct": true,
+            "answer": "3"
+          }
+        },
+        {
+          "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+          "method": "POST",
+          "area": "sessions",
+          "status": 200,
+          "count": 1,
+          "level": 1,
+          "mastery": 0.7142857142857143,
+          "completed": false,
+          "questionId": "equations-1-2",
+          "feedback": {
+            "correct": true,
+            "answer": "3"
+          }
+        },
+        {
+          "scenario": "L43 ответы в двух сессиях образуют единый согласованный журнал mastery",
+          "method": "GET",
+          "area": "progress",
+          "status": 200,
+          "metrics": {
+            "total": 17,
+            "correct": 17,
+            "accuracy": 1,
+            "completedTrainings": 1
+          }
+        }
+      ],
+      "status": "passed",
+      "durationMs": 118.60109999999986,
+      "diagnostics": []
+    },
+    {
+      "id": "аналитика150учеников не превышает100 bind-параметров D1",
+      "source": "tests/learning-d1.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "аналитика150учеников не превышает100 bind-параметров D1",
+      "expected": "аналитика150учеников не превышает100 bind-параметров D1",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 79.00990000000002,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии диагностика 0 из5 → уровень1",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии диагностика 0 из5 → уровень1",
+      "expected": "диагностика 0 из5 → уровень1",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 1.5938999999999623,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии диагностика 2 из5 → уровень1",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии диагностика 2 из5 → уровень1",
+      "expected": "диагностика 2 из5 → уровень1",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.2016999999999598,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии диагностика 3 из5 → уровень2",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии диагностика 3 из5 → уровень2",
+      "expected": "диагностика 3 из5 → уровень2",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.11969999999996617,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии диагностика 4 из5 → уровень3",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии диагностика 4 из5 → уровень3",
+      "expected": "диагностика 4 из5 → уровень3",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.1786999999999921,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии диагностика 5 из5 → уровень3",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии диагностика 5 из5 → уровень3",
+      "expected": "диагностика 5 из5 → уровень3",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.18990000000002283,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии точная граница50% относится к среднему",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии точная граница50% относится к среднему",
+      "expected": "точная граница50% относится к среднему",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.1331000000000131,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии пороги можно изменить",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии пороги можно изменить",
+      "expected": "пороги можно изменить",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.11269999999996116,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии три правильных повышают уровень",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии три правильных повышают уровень",
+      "expected": "три правильных повышают уровень",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.23149999999998272,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии две ошибки снижают уровень",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии две ошибки снижают уровень",
+      "expected": "две ошибки снижают уровень",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.28910000000007585,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии чередование не повышает уровень",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии чередование не повышает уровень",
+      "expected": "чередование не повышает уровень",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.3324999999999818,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии верхняя граница3",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии верхняя граница3",
+      "expected": "верхняя граница3",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.14660000000003492,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии нижняя граница1",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии нижняя граница1",
+      "expected": "нижняя граница1",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.13750000000004547,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии фиксированный режим не адаптирует уровень",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии фиксированный режим не адаптирует уровень",
+      "expected": "фиксированный режим не адаптирует уровень",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.19689999999991414,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии априорный mastery при пустой истории 0.5",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии априорный mastery при пустой истории 0.5",
+      "expected": "априорный mastery при пустой истории 0.5",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.40610000000003765,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии сложное правильное решение весит больше простого",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии сложное правильное решение весит больше простого",
+      "expected": "сложное правильное решение весит больше простого",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.33609999999998763,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии повтор дисконтируется",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии повтор дисконтируется",
+      "expected": "повтор дисконтируется",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.17700000000002092,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии выбор не повторяет последнее задание при наличии новых",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии выбор не повторяет последнее задание при наличии новых",
+      "expected": "выбор не повторяет последнее задание при наличии новых",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 15.692699999999945,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии два одинаковых типа ошибок дают целевое повторение",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии два одинаковых типа ошибок дают целевое повторение",
+      "expected": "два одинаковых типа ошибок дают целевое повторение",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 1.0720000000000027,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии банк содержит уникальные id и все уровни по каждой теме",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии банк содержит уникальные id и все уровни по каждой теме",
+      "expected": "банк содержит уникальные id и все уровни по каждой теме",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.5732000000000426,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии принимает десятичную запятую, но не пустой/произвольный ответ",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии принимает десятичную запятую, но не пустой/произвольный ответ",
+      "expected": "принимает десятичную запятую, но не пустой/произвольный ответ",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.49059999999997217,
+      "diagnostics": []
+    },
+    {
+      "id": "Правила адаптации — заранее заданные сценарии долгая история повторов не меняет целевой уровень диагностики",
+      "source": "tests/learning-engine.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Правила адаптации — заранее заданные сценарии долгая история повторов не меняет целевой уровень диагностики",
+      "expected": "долгая история повторов не меняет целевой уровень диагностики",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.5700999999999112,
+      "diagnostics": []
+    },
+    {
+      "id": "распределение mastery считает учащихся, не количество ответов",
+      "source": "tests/learning-metrics.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "распределение mastery считает учащихся, не количество ответов",
+      "expected": "распределение mastery считает учащихся, не количество ответов",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 4.481300000000033,
+      "diagnostics": []
+    },
+    {
+      "id": "случаи банка имеют независимо рассчитанные эталоны",
+      "source": "tests/learning-metrics.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "случаи банка имеют независимо рассчитанные эталоны",
+      "expected": "случаи банка имеют независимо рассчитанные эталоны",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 3.8851999999999407,
+      "diagnostics": []
+    },
+    {
+      "id": "средний mastery темы не дисконтирует ответ другого ученика как повтор",
+      "source": "tests/learning-metrics.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "средний mastery темы не дисконтирует ответ другого ученика как повтор",
+      "expected": "средний mastery темы не дисконтирует ответ другого ученика как повтор",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.7566000000000486,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot хеширует Argon2id с солью и проверяет пароль",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot хеширует Argon2id с солью и проверяет пароль",
+      "expected": "хеширует Argon2id с солью и проверяет пароль",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 2134.5617,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot защищает приватные данные и CSRF",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot защищает приватные данные и CSRF",
+      "expected": "защищает приватные данные и CSRF",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 80.51789999999983,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot регистрирует изолированные аккаунты",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot регистрирует изолированные аккаунты",
+      "expected": "регистрирует изолированные аккаунты",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 1728.0989999999997,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot создаёт шаблон урока с правильным временем, сохраняет и изолирует",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot создаёт шаблон урока с правильным временем, сохраняет и изолирует",
+      "expected": "создаёт шаблон урока с правильным временем, сохраняет и изолирует",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 41.66849999999977,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot сохраняет правки и отклоняет конфликт версии",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot сохраняет правки и отклоняет конфликт версии",
+      "expected": "сохраняет правки и отклоняет конфликт версии",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 42.21399999999994,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot экспортирует настоящие DOCX, PDF и PPTX с кириллицей",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot экспортирует настоящие DOCX, PDF и PPTX с кириллицей",
+      "expected": "экспортирует настоящие DOCX, PDF и PPTX с кириллицей",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 477.8104000000003,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot сохраняет чат и помечает демо-ответ",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot сохраняет чат и помечает демо-ответ",
+      "expected": "сохраняет чат и помечает демо-ответ",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 67.33639999999923,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot не позволяет ученику создавать классы и проверять работы",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot не позволяет ученику создавать классы и проверять работы",
+      "expected": "не позволяет ученику создавать классы и проверять работы",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 20.463199999999233,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot создаёт класс, одноразовое приглашение и задание",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot создаёт класс, одноразовое приглашение и задание",
+      "expected": "создаёт класс, одноразовое приглашение и задание",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 79.1864999999998,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot скрывает ответы и не разрешает редактирование материала учителя",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot скрывает ответы и не разрешает редактирование материала учителя",
+      "expected": "скрывает ответы и не разрешает редактирование материала учителя",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 43.446100000000115,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot принимает работу, сохраняет ручную оценку и показывает только свой результат",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot принимает работу, сохраняет ручную оценку и показывает только свой результат",
+      "expected": "принимает работу, сохраняет ручную оценку и показывает только свой результат",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 44.17919999999958,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot сохраняет тему между сессиями, выполняет выход и повторный вход",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot сохраняет тему между сессиями, выполняет выход и повторный вход",
+      "expected": "сохраняет тему между сессиями, выполняет выход и повторный вход",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 563.0385000000006,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot ограничивает тест серверной сессией и не принимает повторную отправку",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot ограничивает тест серверной сессией и не принимает повторную отправку",
+      "expected": "ограничивает тест серверной сессией и не принимает повторную отправку",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 64.66180000000077,
+      "diagnostics": []
+    },
+    {
+      "id": "Критические операции EduPilot проверяет сигнатуру файла и изолирует приватное вложение",
+      "source": "tests/platform.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "Критические операции EduPilot проверяет сигнатуру файла и изолирует приватное вложение",
+      "expected": "проверяет сигнатуру файла и изолирует приватное вложение",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 482.53049999999985,
+      "diagnostics": []
+    },
+    {
+      "id": "deterministic SIMULATION of the exported learning engine reproduces all 24 trajectories and preserves their explicit simulated status",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "deterministic SIMULATION of the exported learning engine reproduces all 24 trajectories and preserves their explicit simulated status",
+      "expected": "reproduces all 24 trajectories and preserves their explicit simulated status",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 73.97079999999994,
+      "diagnostics": []
+    },
+    {
+      "id": "deterministic SIMULATION of the exported learning engine uses common response draws for identical task/exposure inputs and changes draws with the seed",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "deterministic SIMULATION of the exported learning engine uses common response draws for identical task/exposure inputs and changes draws with the seed",
+      "expected": "uses common response draws for identical task/exposure inputs and changes draws with the seed",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 1.0870000000001028,
+      "diagnostics": []
+    },
+    {
+      "id": "deterministic SIMULATION of the exported learning engine shares the five diagnostic tasks and responses across modes",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "deterministic SIMULATION of the exported learning engine shares the five diagnostic tasks and responses across modes",
+      "expected": "shares the five diagnostic tasks and responses across modes",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 17.1644,
+      "diagnostics": []
+    },
+    {
+      "id": "deterministic SIMULATION of the exported learning engine marks actual generated answers and derives every state from engine evidence",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "deterministic SIMULATION of the exported learning engine marks actual generated answers and derives every state from engine evidence",
+      "expected": "marks actual generated answers and derives every state from engine evidence",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 93.36770000000001,
+      "diagnostics": []
+    },
+    {
+      "id": "deterministic SIMULATION of the exported learning engine keeps fixed practice on the predefined 3,1,2 cycle while adaptive selections follow the current level",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "deterministic SIMULATION of the exported learning engine keeps fixed practice on the predefined 3,1,2 cycle while adaptive selections follow the current level",
+      "expected": "keeps fixed practice on the predefined 3,1,2 cycle while adaptive selections follow the current level",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 9.457300000000032,
+      "diagnostics": []
+    },
+    {
+      "id": "deterministic SIMULATION of the exported learning engine reports failure to reach mastery as null and writes full, escaped trace CSV",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "deterministic SIMULATION of the exported learning engine reports failure to reach mastery as null and writes full, escaped trace CSV",
+      "expected": "reports failure to reach mastery as null and writes full, escaped trace CSV",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 11.831900000000019,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) returns missing descriptives for the empty observation template",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) returns missing descriptives for the empty observation template",
+      "expected": "returns missing descriptives for the empty observation template",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.8854999999999791,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) calculates literal paired gains, observed time, repeat opportunities and item-level usability",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) calculates literal paired gains, observed time, repeat opportunities and item-level usability",
+      "expected": "calculates literal paired gains, observed time, repeat opportunities and item-level usability",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 1.7563000000000102,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) excludes unconfirmed consent and does not turn missing post scores into zero",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) excludes unconfirmed consent and does not turn missing post scores into zero",
+      "expected": "excludes unconfirmed consent and does not turn missing post scores into zero",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.6781999999999471,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"participant_code\":\"Jane Doe\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"participant_code\":\"Jane Doe\"}",
+      "expected": "rejects invalid or identifying input {\"participant_code\":\"Jane Doe\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.7104000000000497,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"notes_no_pii\":\"jane@example.org\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"notes_no_pii\":\"jane@example.org\"}",
+      "expected": "rejects invalid or identifying input {\"notes_no_pii\":\"jane@example.org\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.21010000000001128,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"group_code\":\"control\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"group_code\":\"control\"}",
+      "expected": "rejects invalid or identifying input {\"group_code\":\"control\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.1570000000000391,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"consent_status\":\"yes\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"consent_status\":\"yes\"}",
+      "expected": "rejects invalid or identifying input {\"consent_status\":\"yes\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.13819999999998345,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"phase\":\"exam\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"phase\":\"exam\"}",
+      "expected": "rejects invalid or identifying input {\"phase\":\"exam\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.33330000000000837,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"duration_total_seconds\":\"-1\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"duration_total_seconds\":\"-1\"}",
+      "expected": "rejects invalid or identifying input {\"duration_total_seconds\":\"-1\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.181699999999978,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"duration_total_seconds\":\"NaN\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"duration_total_seconds\":\"NaN\"}",
+      "expected": "rejects invalid or identifying input {\"duration_total_seconds\":\"NaN\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.20479999999997744,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"inactive_seconds\":\"61\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"inactive_seconds\":\"61\"}",
+      "expected": "rejects invalid or identifying input {\"inactive_seconds\":\"61\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.16680000000008022,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"correct_count\":\"5\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"correct_count\":\"5\"}",
+      "expected": "rejects invalid or identifying input {\"correct_count\":\"5\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.2615000000000691,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"score_points\":\"5\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"score_points\":\"5\"}",
+      "expected": "rejects invalid or identifying input {\"score_points\":\"5\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.31910000000004857,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"repeat_error_count\":\"2\",\"repeat_error_opportunities\":\"1\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"repeat_error_count\":\"2\",\"repeat_error_opportunities\":\"1\"}",
+      "expected": "rejects invalid or identifying input {\"repeat_error_count\":\"2\",\"repeat_error_opportunities\":\"1\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.3288000000000011,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"usability_clarity_1_5\":\"6\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"usability_clarity_1_5\":\"6\"}",
+      "expected": "rejects invalid or identifying input {\"usability_clarity_1_5\":\"6\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.26720000000000255,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"score_points\":\"\",\"missing_reason_code\":\"\"}",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects invalid or identifying input {\"score_points\":\"\",\"missing_reason_code\":\"\"}",
+      "expected": "rejects invalid or identifying input {\"score_points\":\"\",\"missing_reason_code\":\"\"}",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.6669999999999163,
+      "diagnostics": []
+    },
+    {
+      "id": "future observation calculator (separate from SIMULATION) rejects repeated session rows and conflicting group allocation",
+      "source": "tests/research-simulation.test.ts",
+      "initial": "Литералы и фиксированные входы, описанные в исходном тесте до реализации.",
+      "actions": "future observation calculator (separate from SIMULATION) rejects repeated session rows and conflicting group allocation",
+      "expected": "rejects repeated session rows and conflicting group allocation",
+      "actual": {
+        "assertions": "passed",
+        "diagnostics": []
+      },
+      "status": "passed",
+      "durationMs": 0.5817000000000689,
+      "diagnostics": []
+    }
+  ]
+}

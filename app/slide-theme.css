@@ -1,0 +1,10 @@
+.slide-preview h2 {
+  color: var(--slide-text, #f4f7ff);
+}
+.slide-preview p,
+.slide-footer {
+  color: var(--slide-muted, #abb7d0);
+}
+.slide-preview .slide-kicker {
+  color: var(--slide-accent, #64f5da);
+}
