@@ -116,7 +116,8 @@ const visibleTools = tools.filter((tool) => tool.type !== "video");
 export function EduPilot() {
   const router = useRouter();
   const pathname = usePathname() || "/";
-  const path = pathname;
+  const [pendingPath, setPendingPath] = useState<string | null>(null);
+  const path = pendingPath || pathname;
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
@@ -163,8 +164,12 @@ export function EduPilot() {
   useEffect(() => {
     setMenu(false);
   }, [path]);
+  useEffect(() => {
+    setPendingPath(null);
+  }, [pathname]);
   const navigate = (to: string) => {
     if(!window.dispatchEvent(new Event('edupilot:navigate',{cancelable:true}))) return;
+    setPendingPath(to);
     router.push(to);
   };
   const savePreferences = async (patch: any) => {

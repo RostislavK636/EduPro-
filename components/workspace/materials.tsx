@@ -166,7 +166,7 @@ export function ToolPage({ type }: { type: ToolType }) {
             : {}),
         },
       });
-      navigate("/materials/" + material.id);
+      window.location.assign("/materials/" + material.id);
       toast.success(
         type === "review"
           ? "Ручная оценка сохранена"

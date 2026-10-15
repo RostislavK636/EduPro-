@@ -46,14 +46,16 @@ export function LearningLibrary() {
   </div>;
 }
 
-function TaskEditor({ task, classes, onSaved }: { task: Task; classes: ClassOption[]; onSaved: (task: Task) => void }) {
-  const [raw, setRaw] = useState(JSON.stringify(task.questionJson, null, 2));
-  const [classId, setClassId] = useState(task.classId || '');
+function TaskEditor({ task: initialTask, classes, onSaved }: { task: Task; classes: ClassOption[]; onSaved: (task: Task) => void }) {
+  const [currentTask, setCurrentTask] = useState(initialTask);
+  const [raw, setRaw] = useState(JSON.stringify(initialTask.questionJson, null, 2));
+  const [classId, setClassId] = useState(initialTask.classId || '');
   const [checked, setChecked] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  useEffect(() => { setRaw(JSON.stringify(task.questionJson, null, 2)); setClassId(task.classId || ''); setChecked(false); }, [task.version, task.id]);
-  const dirty = raw !== JSON.stringify(task.questionJson, null, 2) || classId !== (task.classId || '');
+  useEffect(() => { setCurrentTask(initialTask); setRaw(JSON.stringify(initialTask.questionJson, null, 2)); setClassId(initialTask.classId || ''); setChecked(false); }, [initialTask]);
+  const task = currentTask;
+  const dirty = raw !== JSON.stringify(currentTask.questionJson, null, 2) || classId !== (currentTask.classId || '');
   const update = async (status: TaskStatus, editing = false) => {
     if (busy) return; setError('');
     let question: Question | undefined;
@@ -63,7 +65,8 @@ function TaskEditor({ task, classes, onSaved }: { task: Task; classes: ClassOpti
     }
     setBusy(true);
     try {
-      const result = await api(`learning/tasks/${task.id}`, 'PATCH', { version: task.version, status, ...(editing ? { question, classId: classId || null } : {}) });
+      const result = await api(`learning/tasks/${currentTask.id}`, 'PATCH', { version: currentTask.version, status, ...(editing ? { question, classId: classId || null } : {}) });
+      setCurrentTask(result.task);
       onSaved(result.task); setChecked(false);
     } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
   };
