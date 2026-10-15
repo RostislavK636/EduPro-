@@ -68,7 +68,17 @@ export function Training() {
     writeLocal(key, JSON.stringify(request));
     writeLocal(holdKey(data.session.id), turnId);
     try {
-      const next = await api<SessionView>(`learning/sessions/${data.session.id}/answer`, 'POST', { turnId, ...request });
+      let next: SessionView;
+      try {
+        next = await api<SessionView>(`learning/sessions/${data.session.id}/answer`, 'POST', { turnId, ...request });
+      } catch (firstError) {
+        // Keep the same request id so a retry is idempotent if the server already stored the answer.
+        try {
+          next = await api<SessionView>(`learning/sessions/${data.session.id}/answer`, 'POST', { turnId, ...request });
+        } catch {
+          throw firstError;
+        }
+      }
       setData(next); setHoldTurnId(turnId); setAssist(null);
     } catch (e) {
       // Reconcile a response lost after the server accepted an answer, without advancing past its explanation.

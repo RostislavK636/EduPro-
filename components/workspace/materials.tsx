@@ -802,19 +802,16 @@ export function MaterialEditor({ id }: { id: string }) {
     return () => clearTimeout(timer);
   }, [material, dirty, saveError]);
   useEffect(() => {
+    if (!dirty) return;
     const prevent = (e: BeforeUnloadEvent) => {
-      if (revision.current > savedRevision.current) {
-        e.preventDefault();
-        e.returnValue = "";
-      }
+      e.preventDefault();
+      e.returnValue = "";
     };
     window.addEventListener("beforeunload", prevent);
-    const protectNavigation = (event:Event) => {
-      if(revision.current>savedRevision.current && !confirm('Есть несохранённые изменения. Покинуть редактор и отказаться от них?')) event.preventDefault();
+    return () => {
+      window.removeEventListener("beforeunload", prevent);
     };
-    window.addEventListener('edupilot:navigate',protectNavigation);
-    return () => {window.removeEventListener("beforeunload", prevent);window.removeEventListener('edupilot:navigate',protectNavigation);};
-  }, []);
+  }, [dirty]);
   useEffect(() => {
     if (!scenePlaying || !material) return;
     const seconds = material.contentJson.sections[selected]?.duration || 5;

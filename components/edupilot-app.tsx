@@ -116,8 +116,7 @@ const visibleTools = tools.filter((tool) => tool.type !== "video");
 export function EduPilot() {
   const router = useRouter();
   const pathname = usePathname() || "/";
-  const [path, setPath] = useState(pathname);
-  useEffect(() => setPath(pathname), [pathname]);
+  const path = pathname;
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [menu, setMenu] = useState(false);
