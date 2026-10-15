@@ -12,7 +12,7 @@ import {
 import PptxGenJS from "pptxgenjs";
 import { PDFDocument, rgb } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
-import { documentSchema, toolNames, ToolType, Section } from "./domain";
+import { documentSchema, ToolType, Section } from "./domain";
 import { getRuntime } from "./runtime";
 import { slidePalette } from "./slide-theme";
 import { db } from "./database";
@@ -35,6 +35,59 @@ async function getImage(section: Section, ownerId: string) {
       }
     : null;
 }
+
+function answerLines(section: Section) {
+  if (answerOptions(section).length)
+    return ["Ответ: ______________________________________________"];
+
+  const text = `${section.title}\n${section.body}`.toLocaleLowerCase("ru-RU");
+  const longAnswer =
+    /определени|объясн|обосну|сравн|проанализ|опишите|расскажите|почему|приведите пример|развернут|развёрнут|эссе|сочинени/.test(
+      text,
+    );
+  const shortAnswer =
+    /назовите|укажите|впишите|вставьте|вычисл|решите|сколько|кто|когда|где|дата|формул|одним словом|термин/.test(
+      text,
+    );
+  const count = longAnswer ? 4 : shortAnswer ? 1 : 2;
+  return [
+    "Ответ: ______________________________________________",
+    ...Array.from({ length: count - 1 }, () => "______________________________________________________"),
+  ];
+}
+
+function answerOptions(section: Section) {
+  return (section.options || []).filter((option) => option.trim());
+}
+
+function isQuestionMaterial(type: ToolType) {
+  return type === "test" || type === "worksheet";
+}
+
+function questionLines(section: Section) {
+  return section.body
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .filter(
+      (line) =>
+        line.trim() &&
+        !/^место для ответа\s*:/i.test(line.trim()) &&
+        !/^ответ\s*:/i.test(line.trim()),
+    );
+}
+
+function testQuestionText(section: Section, index: number) {
+  return [
+    `${index}. ${section.title}`,
+    ...questionLines(section),
+    ...(answerOptions(section).length
+      ? answerOptions(section).map(
+          (option, optionIndex) => `${optionIndex + 1}) ${option}`,
+        )
+      : []),
+  ];
+}
+
 export async function exportMaterial(
   material: any,
   format: string,
@@ -46,25 +99,35 @@ export async function exportMaterial(
   if (format === "docx") {
     const children: any[] = [
       new Paragraph({ text: title, heading: HeadingLevel.TITLE }),
-      new Paragraph(
-        toolNames[material.type as ToolType] +
-          " · " +
-          material.subject +
-          " · " +
-          material.grade +
-          " класс",
-      ),
+      new Paragraph(`Класс: ${material.grade}`),
+      new Paragraph(`Предмет: ${material.subject}`),
     ];
-    if (data.demo)
+    if (isQuestionMaterial(material.type as ToolType)) {
+      sections.forEach((section, index) => {
+        children.push(
+          new Paragraph({
+            text: `${index + 1}. ${section.title}`,
+            heading: HeadingLevel.HEADING_1,
+          }),
+          ...questionLines(section).map(
+            (line) => new Paragraph({ children: [new TextRun(line)] }),
+          ),
+          ...(answerOptions(section).length
+            ? answerOptions(section).map(
+                (option, optionIndex) =>
+                  new Paragraph(`${optionIndex + 1}) ${option}`),
+              )
+            : []),
+          ...answerLines(section).map(
+            (line) => new Paragraph({ text: line }),
+          ),
+        );
+        if (teacher && section.answer)
+          children.push(new Paragraph(`Ответ / критерии: ${section.answer}`));
+      });
+    }
+    if (data.demo && !isQuestionMaterial(material.type as ToolType))
       children.push(new Paragraph("Редактируемый демонстрационный шаблон"));
-    if (material.type === "test")
-      children.push(
-        new Paragraph(
-          teacher
-            ? "Вариант преподавателя · с ответами"
-            : "Вариант ученика · без ответов",
-        ),
-      );
     if (material.type === "lesson")
       children.push(
         new Table({
@@ -88,16 +151,18 @@ export async function exportMaterial(
           ],
         }),
       );
-    for (const s of sections) {
+    for (const s of isQuestionMaterial(material.type as ToolType)
+      ? []
+      : sections) {
       children.push(
         new Paragraph({ text: s.title, heading: HeadingLevel.HEADING_1 }),
         ...s.body
           .split("\n")
           .map((line) => new Paragraph({ children: [new TextRun(line)] })),
       );
-      if (s.options?.length)
+      if (answerOptions(s).length)
         children.push(
-          ...s.options.map((o, i) => new Paragraph(i + 1 + ") " + o)),
+          ...answerOptions(s).map((o, i) => new Paragraph(i + 1 + ") " + o)),
         );
       const img = await getImage(s, material.userId);
       if (img)
@@ -247,16 +312,24 @@ export async function exportMaterial(
       }
     };
     draw(title, 21);
-    draw(material.subject + " · " + material.grade + " класс");
-    if (data.demo) draw("Редактируемый демонстрационный шаблон", 9);
-    if (material.type === "test")
-      draw(
-        teacher
-          ? "Вариант преподавателя · с ответами"
-          : "Вариант ученика · без ответов",
-        9,
-      );
-    for (const s of sections) {
+    draw("Класс: " + material.grade);
+    draw("Предмет: " + material.subject);
+    if (data.demo && !isQuestionMaterial(material.type as ToolType))
+      draw("Редактируемый демонстрационный шаблон", 9);
+    if (isQuestionMaterial(material.type as ToolType)) {
+      sections.forEach((section, index) => {
+        y -= 12;
+        testQuestionText(section, index + 1).forEach((text, lineIndex) =>
+          draw(text, lineIndex === 0 ? 14 : 11),
+        );
+        answerLines(section).forEach((line) => draw(line));
+        if (teacher && section.answer)
+          draw("Ответ / критерии: " + section.answer, 9);
+      });
+    }
+    for (const s of isQuestionMaterial(material.type as ToolType)
+      ? []
+      : sections) {
       y -= 12;
       draw(
         s.title +
@@ -270,8 +343,8 @@ export async function exportMaterial(
         14,
       );
       draw(s.body);
-      if (s.options?.length)
-        s.options.forEach((o, i) => draw(i + 1 + ") " + o));
+      if (answerOptions(s).length)
+        answerOptions(s).forEach((o, i) => draw(i + 1 + ") " + o));
       const img = await getImage(s, material.userId);
       if (img) {
         const embedded =

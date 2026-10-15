@@ -887,7 +887,10 @@ export function MaterialEditor({ id }: { id: string }) {
       const link = document.createElement("a");
       link.href = url;
       link.download = m.title + "." + format;
+      link.style.display = "none";
+      document.body.appendChild(link);
       link.click();
+      link.remove();
       setTimeout(() => URL.revokeObjectURL(url), 3000);
       toast.success("Файл подготовлен");
     } catch (e) {

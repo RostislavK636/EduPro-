@@ -202,7 +202,7 @@ export function template(p: GeneratorInput): DocumentContent {
       sections: Array.from({ length: p.count * p.variants }, (_, i) =>
         block(
           `${p.variants > 1 ? `Вариант ${Math.floor(i / p.count) + 1} · ` : ""}Задание ${(i % p.count) + 1}`,
-          `[${p.questionTypes[i % p.questionTypes.length] || "Открытый вопрос"}]\nСоставьте задание по теме «${p.title}».\nМесто для ответа: ______________________________`,
+          `[${p.questionTypes[i % p.questionTypes.length] || "Открытый вопрос"}]\nСоставьте задание по теме «${p.title}».`,
           {
             answer: p.answerSheet
               ? "Укажите правильный ответ и критерии оценивания."
