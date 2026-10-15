@@ -119,6 +119,7 @@ export function EduPilot() {
   const path = pathname;
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [menu, setMenu] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [background, setBackground] =
@@ -126,8 +127,17 @@ export function EduPilot() {
   const [bgOpen, setBgOpen] = useState(false);
   const [view, setView] = useState("teacher");
   const refresh = async () => {
+    setLoadError("");
     try {
-      const data = await api("session");
+      const data = await Promise.race([
+        api("session"),
+        new Promise<never>((_, reject) =>
+          setTimeout(
+            () => reject(new Error("Сервер отвечает слишком долго. Проверьте, запущено ли приложение, и повторите попытку.")),
+            15000,
+          ),
+        ),
+      ]);
       setSession(data);
       if (data.user) {
         setView(data.user.role);
@@ -139,7 +149,10 @@ export function EduPilot() {
           data.user.settings?.theme || "dark";
       }
     } catch (e) {
-      toast.error((e as Error).message);
+      const message = (e as Error).message;
+      setLoadError(message);
+      setSession(null);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -233,6 +246,14 @@ export function EduPilot() {
           <div className="boot">
             <Orbit className="spin" />
             <span>Открываем пространство знаний…</span>
+          </div>
+        ) : loadError ? (
+          <div className="boot">
+            <Orbit />
+            <span>{loadError}</span>
+            <button className="button secondary" onClick={refresh}>
+              Повторить подключение
+            </button>
           </div>
         ) : session?.user ? (
           <div className={`workspace ${collapsed ? "collapsed" : ""}`}>
