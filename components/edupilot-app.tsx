@@ -131,7 +131,11 @@ export function EduPilot() {
       const data = await api("session");
       setSession(data);
       if (data.user) {
-        setView(data.user.settings?.preferences?.viewMode || data.user.role);
+        setView(
+          data.user.role === "student"
+            ? "student"
+            : data.user.settings?.preferences?.viewMode || "teacher",
+        );
         setBackground({
           ...defaultBackground,
           ...data.user.settings?.preferences?.background,
