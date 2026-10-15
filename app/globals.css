@@ -494,23 +494,16 @@ b {
   margin-bottom: 19px;
   gap: 3px;
 }
-.role-switch button {
+.role-display {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  width: 50%;
+  width: 100%;
   padding: 8px 4px;
-  background: none;
-  border: 0;
   border-radius: 6px;
-  color: var(--text-secondary);
-  font-size: 11px;
-}
-.role-switch button.active {
-  background: rgba(100, 245, 218, 0.12);
   color: var(--accent-primary);
-  box-shadow: inset 0 0 0 1px rgba(100, 245, 218, 0.14);
+  font-size: 11px;
 }
 .nav-link {
   display: flex;

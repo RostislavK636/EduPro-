@@ -131,11 +131,7 @@ export function EduPilot() {
       const data = await api("session");
       setSession(data);
       if (data.user) {
-        setView(
-          data.user.role === "student"
-            ? "student"
-            : data.user.settings?.preferences?.viewMode || "teacher",
-        );
+        setView(data.user.role);
         setBackground({
           ...defaultBackground,
           ...data.user.settings?.preferences?.background,
@@ -248,14 +244,6 @@ export function EduPilot() {
               collapsed={collapsed}
               view={view}
               onCollapse={() => setCollapsed(!collapsed)}
-              setView={async (v: string) => {
-                if (v === "teacher" && session.user.role !== "teacher") {
-                  toast.info("Роль преподавателя выбирается при регистрации.");
-                  return;
-                }
-                setView(v);
-                await savePreferences({ viewMode: v });
-              }}
               logout={logout}
               theme={theme}
             />
@@ -363,7 +351,6 @@ export function GlassSidebar({
   open,
   collapsed,
   view,
-  setView,
   onCollapse,
   logout,
   theme,
@@ -444,21 +431,15 @@ export function GlassSidebar({
           <PanelLeftClose size={16} />
         </button>
       </div>
-      <div className="role-switch">
-        <button
-          className={view === "teacher" ? "active" : ""}
-          onClick={() => setView("teacher")}
-        >
-          <BookOpen size={14} />
-          <span>Учитель</span>
-        </button>
-        <button
-          className={view === "student" ? "active" : ""}
-          onClick={() => setView("student")}
-        >
-          <GraduationCap size={16} />
-          <span>Ученик</span>
-        </button>
+      <div className="role-switch" aria-label="Роль аккаунта">
+        <div className="role-display">
+          {view === "teacher" ? (
+            <BookOpen size={14} />
+          ) : (
+            <GraduationCap size={16} />
+          )}
+          <span>{view === "teacher" ? "Учитель" : "Ученик"}</span>
+        </div>
       </div>
       <button
         className={`nav-link home-link ${path === "/workspace" || path === "/" ? "active" : ""}`}
