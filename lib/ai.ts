@@ -90,7 +90,9 @@ export class LiveAIProvider extends MockAIProvider {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${config("AI_API_KEY")}`,
+          ...(config("AI_API_KEY")
+            ? { Authorization: "Bearer " + config("AI_API_KEY") }
+            : {}),
         },
         body: JSON.stringify({
           model: config("AI_MODEL", "gpt-4.1-mini"),
@@ -203,16 +205,22 @@ export class LiveAIProvider extends MockAIProvider {
     ]);
   }
 }
+function isLocalOllama() {
+  const baseUrl = config("AI_BASE_URL", "https://api.openai.com/v1");
+  return ["localhost", "127.0.0.1"].includes(new URL(baseUrl).hostname);
+}
 export function getProvider(): AIProvider {
   const mode = config("AI_MODE", "auto");
-  if (mode === "live" && !config("AI_API_KEY"))
+  if (mode === "live" && !config("AI_API_KEY") && !isLocalOllama())
     throw new HttpError(503, "AI_MODE=live требует AI_API_KEY.");
-  return mode === "mock" || !config("AI_API_KEY")
+  return mode === "mock" || (!config("AI_API_KEY") && !isLocalOllama())
     ? new MockAIProvider()
     : new LiveAIProvider();
 }
 export function aiStatus() {
-  const live = config("AI_MODE", "auto") !== "mock" && !!config("AI_API_KEY");
+  const live =
+    config("AI_MODE", "auto") !== "mock" &&
+    (!!config("AI_API_KEY") || isLocalOllama());
   return {
     mode: live ? "live" : "mock",
     configured: live,
