@@ -153,7 +153,6 @@ export function EduPilot() {
   }, [path]);
   const navigate = (to: string) => {
     if(!window.dispatchEvent(new Event('edupilot:navigate',{cancelable:true}))) return;
-    setPath(to.split("?")[0]);
     router.push(to);
   };
   const savePreferences = async (patch: any) => {
